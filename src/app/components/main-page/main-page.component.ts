@@ -27,6 +27,8 @@ export class MainPageComponent implements OnInit {
   avatarGetList: AvatarGet[] = [];
 
   user = '';
+  sessionUserId = 0;
+  sessionUser: User;
 
   currentFace: Part;
   currentEye: Part;
@@ -42,6 +44,8 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.getAllParts();
     this.getAllUsers();
+    this.sessionUserId = JSON.parse(localStorage.getItem('user')).id;
+    this.sessionUser = JSON.parse(localStorage.getItem('user'));
   }
 
   selectedFace(img: Part): void {
@@ -80,6 +84,7 @@ export class MainPageComponent implements OnInit {
   }
 
   getAvatarsByUserId(userParam: User): void {
+    this.clearUserAvatarsList();
     this.service.getAvatarsByUserId(userParam.id).subscribe(data => {
       this.avatarGetList.push(...data);
     });
@@ -151,6 +156,18 @@ export class MainPageComponent implements OnInit {
     } else {
       this.alert.info('Debe rellenar el campo nombre del avatar', '');
     }
+  }
+
+  deleteAvatar(avatarId: number): void {
+    this.service.deleteAvatar(avatarId).subscribe(data => {
+      if (data === true) {
+        this.logger.info('Se eliminó el avatar para el usuario ' + JSON.parse(localStorage.getItem('user')).username);
+        this.alert.success('Avatar eliminado exitosamente', 'Eliminación completada');
+      } else {
+        this.logger.info('No se pudo eliminar el avatar para el usuario ' + JSON.parse(localStorage.getItem('user')).username);
+        this.alert.error('Hubo un error al querer eliminar el avatar', '');
+      }
+    });
   }
 
   resetAvatar(): void {

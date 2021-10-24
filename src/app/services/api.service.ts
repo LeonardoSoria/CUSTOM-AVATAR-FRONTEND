@@ -37,6 +37,10 @@ export class ApiService {
     return this.http.post<Avatar>(`${this.baseUrl}/saveAvatar`, avatar);
   }
 
+  deleteAvatar(avatarId: number): Observable<any> {
+    return this.http.get<boolean>(`${this.baseUrl}/deleteAvatar?avatarId=${avatarId}`);
+  }
+
   getFaces(): Observable<any> {
     return  this.http.get<Part>(`${this.baseUrl}/getFaces`);
   }

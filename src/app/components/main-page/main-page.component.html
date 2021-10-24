@@ -14,7 +14,7 @@
       </h1>
       <ul class="list-unstyled components mb-5">
         <li class="active">
-          <a style="cursor: pointer;" href="#openProfile" data-toggle="modal">
+          <a style="cursor: pointer;" (click)="getAvatarsByUserId(sessionUser)" href="#openProfile" data-toggle="modal">
             <span class="fa fa-user mr-3"></span> Profile</a>
         </li>
         <li>
@@ -27,7 +27,7 @@
           <a>Lista de usuarios:</a>
         </li>
         <li class="active" *ngFor="let user of userList">
-          <a style="cursor: pointer;" (click)="getAvatarsByUserId(user)" href="#openProfile" data-toggle="modal">
+          <a *ngIf="user.id != sessionUserId" style="cursor: pointer;" (click)="getAvatarsByUserId(user)" href="#openProfile" data-toggle="modal">
             <span class="fa fa-user mr-3"></span> {{user.username}}</a>
         </li>
       </ul>
@@ -99,8 +99,7 @@
     </div>
     <!-- Form to select parts  -->
 
-    <!-- Building  -->
-    <!-- <div style="margin-top: 10%; margin-left: 50%; height: 20%"> -->
+    <!-- Avatar  -->
     <div>
       <h3>Avatar Customization</h3>
       <div class="parent" style="justify-content: center">
@@ -121,7 +120,7 @@
         <button (click)="saveAvatar()" class="btn btn-success w-25">Save</button>
       </div>
     </div>
-    <!-- Building  -->
+    <!-- Avatar  -->
   </div>
   <!-- Page Content  -->
 </div>
@@ -144,7 +143,11 @@
           </div>
           <div style="display: flex; overflow-x: scroll">
             <div *ngFor="let item of avatarGetList" style="margin-right: 1vh; cursor: pointer;" (click)="selectAvatar(item)" data-dismiss="modal">
-              <h6>{{item.name}}</h6>
+              <div style="display: flex;">
+                <h6>{{item.name}}</h6>
+                <a *ngIf="item.userId == sessionUserId" style="cursor: pointer; margin-left: 1vh;" (click)="deleteAvatar(item.id)" data-dismiss="modal">
+                  <span class="fa fa-trash"></span></a>
+              </div>
               <div class="parent" style="justify-content: center;">
                 <img class="baseImage" width="150" height="150" src="../../../assets/images/face/{{item.faceType.type}}"
                      alt="{{item.faceType.id}}"/>
