@@ -10,9 +10,7 @@
     </div>
     <div class="">
       <h1>
-        <a href="index.html" class="logo"
-        >Business Game<span>A game about real life</span></a
-        >
+        <a href="index.html" class="logo">Custom your avatar!<span>A game about making cats</span></a>
       </h1>
       <ul class="list-unstyled components mb-5">
         <li class="active">
@@ -20,77 +18,113 @@
             <span class="fa fa-user mr-3"></span> Profile</a>
         </li>
         <li>
-          <a (click)="logout()" style="cursor: pointer;"
-          ><span class="fa fa-sign-out mr-3"></span> Sign out</a
-          >
+          <a (click)="logout()" style="cursor: pointer;"><span class="fa fa-sign-out mr-3"></span> Sign out</a>
         </li>
       </ul>
 
-      <div style="margin-top: 20vh; cursor: pointer" (click)="showQuestion()">
-        <a href="#openQuestion" data-toggle="modal"><img
-          style="height: 30vh; width: 100%"
-          src="../../../assets/img/casa.gif"
-          alt=""
-        /> </a>
-        <p style="font-size: 4vh; padding: 1vh; text-align: center">
-          Click on the house to answer some questions!
-        </p>
-      </div>
+      <ul class="list-unstyled components mb-5">
+        <li>
+          <a>Lista de usuarios:</a>
+        </li>
+        <li class="active" *ngFor="let user of userList">
+          <a style="cursor: pointer;" (click)="getAvatarsByUserId(user)" href="#openProfile" data-toggle="modal">
+            <span class="fa fa-user mr-3"></span> {{user.username}}</a>
+        </li>
+      </ul>
+
     </div>
   </nav>
   <!-- Side Bar  -->
 
   <!-- Page Content  -->
-  <div id="content" class="p-4 p-md-5 pt-5">
+  <div id="content" class="p-4 p-md-5 pt-5" style="display: flex;">
+
+    <!-- Form to select parts  -->
+    <div style="margin-right: 10vh;">
+      <h3>Edition</h3>
+      <div style="margin-bottom: 2vh; border-bottom: 1px solid black; padding: 1vh; overflow-x: scroll;">
+        <h5>Faces</h5>
+        <div style="display: flex; justify-content: space-evenly;">
+          <div *ngFor="let item of faceList" style="display: flex;">
+            <img src="../../../assets/images/face/{{item.type}}" width="30px" height="30px"/>
+            <button class="btn btn-primary" (click)="selectedFace(item)">{{item.type}}</button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom: 2vh; border-bottom: 1px solid black; padding: 1vh; overflow-x: scroll;">
+        <h5>Eyes</h5>
+        <div style="display: flex; justify-content: space-evenly;">
+          <div *ngFor="let item of eyeList" style="display: flex;">
+            <img src="../../../assets/images/eye/{{item.type}}" width="30px" height="30px"/>
+            <button class="btn btn-primary" (click)="selectedEye(item)">{{item.type}}</button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom: 2vh; border-bottom: 1px solid black; padding: 1vh; overflow-x: scroll;">
+        <h5>Nose</h5>
+        <div style="display: flex; justify-content: space-evenly;">
+          <div *ngFor="let item of noseList" style="display: flex;">
+            <img src="../../../assets/images/nose/{{item.type}}" width="30px" height="30px"/>
+            <button class="btn btn-primary" (click)="selectedNose(item)">{{item.type}}</button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom: 2vh; border-bottom: 1px solid black; padding: 1vh; overflow-x: scroll;">
+        <h5>Mustache</h5>
+        <div style="display: flex; justify-content: space-evenly;">
+          <div *ngFor="let item of mustacheList" style="display: flex;">
+            <img src="../../../assets/images/moustache/{{item.type}}" width="30px" height="30px"/>
+            <button class="btn btn-primary" (click)="selectedMustache(item)">{{item.type}}</button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom: 2vh; border-bottom: 1px solid black; padding: 1vh; overflow-x: scroll;">
+        <h5>Mouth</h5>
+        <div style="display: flex; justify-content: space-evenly;">
+          <div *ngFor="let item of mouthList" style="display: flex;">
+            <img src="../../../assets/images/mouth/{{item.type}}" width="30px" height="30px"/>
+            <button class="btn btn-primary" (click)="selectedMouth(item)">{{item.type}}</button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom: 2vh; border-bottom: 1px solid black; padding: 1vh; overflow-x: scroll;">
+        <h5>Hat</h5>
+        <div style="display: flex; justify-content: space-evenly;">
+          <div *ngFor="let item of hatList" style="display: flex;">
+            <img src="../../../assets/images/hat/{{item.type}}" width="30px" height="30px"/>
+            <button class="btn btn-primary" (click)="selectedHat(item)">{{item.type}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Form to select parts  -->
 
     <!-- Building  -->
     <!-- <div style="margin-top: 10%; margin-left: 50%; height: 20%"> -->
     <div>
-       <h3>Building Level {{building}}</h3>
-       <img *ngIf="building === 1" style="height: 100%; width: 100%;" src="../../../assets/images/fase-6.gif" alt="" />
-       <img *ngIf="building === 2" style="height: 100%; width: 100%;" src="../../../assets/images/fase-6.gif" alt="" />
-       <img *ngIf="building === 3" style="height: 100%; width: 100%;" src="../../../assets/images/fase-6.gif" alt="" />
-       <img *ngIf="building === 4" style="height: 100%; width: 100%;" src="../../../assets/images/fase-6.gif" alt="" />
-       <img *ngIf="building === 5" style="height: 100%; width: 100%;" src="../../../assets/images/fase-6.gif" alt="" />
-       <img *ngIf="building === 6" style="height: 100%; width: 100%;" src="../../../assets/images/fase-6.gif" alt="" />
-       <img *ngIf="building === 7" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-       <img *ngIf="building === 8" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-       <img *ngIf="building === 9" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-       <img *ngIf="building === 10" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-     </div>
-     <!-- Building  -->
+      <h3>Avatar Customization</h3>
+      <div class="parent" style="justify-content: center">
+        <img class="baseImage" src="../../../assets/images/face/{{currentFace.type}}" alt="{{currentFace.id}}"/>
+        <img class="inFrontImage" src="../../../assets/images/eye/{{currentEye.type}}" alt="{{currentEye.id}}"/>
+        <img class="inFrontImage" src="../../../assets/images/moustache/{{currentMustache.type}}"
+             alt="{{currentMustache.id}}"/>
+        <img class="inFrontImage" src="../../../assets/images/hat/{{currentHat.type}}" alt="{{currentHat.id}}"/>
+        <img class="inFrontImage" src="../../../assets/images/mouth/{{currentMouth.type}}" alt="{{currentMouth.id}}"/>
+        <img class="inFrontImage" src="../../../assets/images/nose/{{currentNose.type}}" alt="{{currentNose.id}}"/>
+      </div>
+      <div class="form-group" style="margin-top: 2vh;">
+        <label for="name">Avatar Name</label>
+        <input [(ngModel)]="name" type="text" class="form-control" id="name" placeholder="Enter avatar name">
+      </div>
+      <div style="display: flex; justify-content: space-evenly; margin-top: 2vh;">
+        <button (click)="resetAvatar()" class="btn btn-danger w-25">Reset</button>
+        <button (click)="saveAvatar()" class="btn btn-success w-25">Save</button>
+      </div>
+    </div>
+    <!-- Building  -->
   </div>
   <!-- Page Content  -->
 </div>
-
-<!-- Questions Modal  -->
-<div id="openQuestion" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h4 class="modal-title">Questions</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label *ngIf="question !== undefined">{{question.CONTENT}}</label>
-          </div>
-          <div>
-            <div *ngFor="let item of answersList">
-              <input style="margin: 3vh; width: 90%; font-size: 9px;" (click)="answerQuestion(item)" class="btn btn-success"
-                     data-dismiss="modal" value="{{item.CONTENT}}">
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <label>Make sure to pick the rigth answer!</label>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- Questions Modal  -->
 
 <!-- Profile Modal  -->
 <div id="openProfile" class="modal fade">
@@ -99,32 +133,33 @@
       <form>
         <div class="modal-header">
           <h4 class="modal-title">Profile</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <button (click)="clearUserAvatarsList()" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label>Username: {{user}}</label>
+            <label><strong>Username: </strong>{{user}}</label>
           </div>
           <div class="form-group">
-            <label>User Level: {{level}}</label>
+            <label><strong>Avatars:</strong></label>
           </div>
-          <div class="form-group">
-            <label>Building Level: {{building}}</label>
-          </div>
-          <div>
-            <img *ngIf="building === 1" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-            <img *ngIf="building === 2" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-            <img *ngIf="building === 3" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-            <img *ngIf="building === 4" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-            <img *ngIf="building === 5" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-            <img *ngIf="building === 6" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-            <img *ngIf="building === 7" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-            <img *ngIf="building === 8" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-            <img *ngIf="building === 9" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-            <img *ngIf="building === 10" style="height: 30%; width: 50%;" src="../../../assets/images/fase-6.gif" alt="" />
-          </div>
-          <div class="form-group">
-            <label>Correct Answers in the current building level: {{correctAnswers}}</label>
+          <div style="display: flex; overflow-x: scroll">
+            <div *ngFor="let item of avatarGetList" style="margin-right: 1vh; cursor: pointer;" (click)="selectAvatar(item)" data-dismiss="modal">
+              <h6>{{item.name}}</h6>
+              <div class="parent" style="justify-content: center;">
+                <img class="baseImage" width="150" height="150" src="../../../assets/images/face/{{item.faceType.type}}"
+                     alt="{{item.faceType.id}}"/>
+                <img class="inFrontImage" width="150" height="150" src="../../../assets/images/eye/{{item.eyeType.type}}"
+                     alt="{{item.eyeType.id}}"/>
+                <img class="inFrontImage" width="150" height="150"
+                     src="../../../assets/images/moustache/{{item.mustacheType.type}}" alt="{{item.mustacheType.id}}"/>
+                <img class="inFrontImage" width="150" height="150" src="../../../assets/images/hat/{{item.hatType.type}}"
+                     alt="{{item.hatType.id}}"/>
+                <img class="inFrontImage" width="150" height="150"
+                     src="../../../assets/images/mouth/{{item.mouthType.type}}" alt="{{item.mouthType.id}}"/>
+                <img class="inFrontImage" width="150" height="150"
+                     src="../../../assets/images/nose/{{item.noseType.type}}" alt="{{item.noseType.id}}"/>
+              </div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
